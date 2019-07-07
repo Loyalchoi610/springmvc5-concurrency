@@ -1,6 +1,17 @@
 type Query {
     bookById(id: ID): Book
     books: [Book]
+    users(id: ID): User
+}
+
+type User{
+    id: ID
+    logs: [Log]
+}
+
+type Log{
+    time: String
+    amount: Int
 }
 
 type Book {

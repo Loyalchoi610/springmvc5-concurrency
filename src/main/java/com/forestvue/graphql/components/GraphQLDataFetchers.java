@@ -1,5 +1,7 @@
 package com.forestvue.graphql.components;
 
+import com.forestvue.domain.UserActionVO;
+import com.forestvue.domain.UserInfoDTO;
 import com.forestvue.service.WellService;
 import com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;
@@ -80,6 +82,18 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
             Map<String,String> book = dataFetchingEnvironment.getSource();
             return book.get("totalPages");
+        };
+    }
+    /*
+    *  개별 로직
+    *
+    * */
+    public DataFetcher<UserInfoDTO> getUserLogFetcher(){
+        return dataFetchingEnvironment -> {
+            UserInfoDTO userInfoDTO = new UserInfoDTO();
+            userInfoDTO.setId(Integer.parseInt(dataFetchingEnvironment.getArgument("id")));
+            userInfoDTO.setLogs(wellService.getUserActionsById(userInfoDTO.getId()));
+            return userInfoDTO;
         };
     }
 }

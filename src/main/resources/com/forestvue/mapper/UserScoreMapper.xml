@@ -10,7 +10,7 @@
     </select>
     <select id="getUserActionsById" resultType="com.forestvue.domain.UserActionVO">
         <![CDATA[
-    select * from getUserActionsById where userid = #{userid}
+    select * from tbl_useraction where userid = #{userid} order by time asc
     ]]>
     </select>
     <select id="findIdByUsername" resultType="int">
